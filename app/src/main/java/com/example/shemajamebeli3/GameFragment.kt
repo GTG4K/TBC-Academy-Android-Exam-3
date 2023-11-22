@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.shemajamebeli3.data.GameData
 import com.example.shemajamebeli3.databinding.FragmentGameBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -19,6 +20,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class GameFragment : Fragment() {
     private lateinit var binding: FragmentGameBinding
+    private lateinit var adapter: XOAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +32,13 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        adapterSetup()
+    }
 
+    private fun adapterSetup() {
+        adapter = XOAdapter()
+        adapter.differ.submitList(GameData.generateGameData(GameType.GAME9))
+        binding.rvXO.adapter = adapter
     }
 
     companion object {

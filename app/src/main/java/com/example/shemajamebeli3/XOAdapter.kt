@@ -10,14 +10,30 @@ import com.example.shemajamebeli3.databinding.XoItemBinding
 
 class XOAdapter : RecyclerView.Adapter<XOAdapter.XOViewHolder>() {
 
-    private var onXOClickListener: ((XO) -> Unit)? = null
     private var xPlayer = true
 
     inner class XOViewHolder(private val binding: XoItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: XO) {
+            if (item.selected) {
+                when (item.xPlayer) {
+                    true -> binding.btnXO.text = "X"
+                    false -> binding.btnXO.text = "O"
+                    else -> binding.btnXO.text = ""
+                }
+            }
+
             binding.btnXO.setOnClickListener {
-                onXOClickListener?.invoke(item)
+                if (!item.selected) {
+                    item.selected = true
+                    if (xPlayer) {
+                        binding.btnXO.text = "X"
+                        xPlayer = !xPlayer
+                    } else {
+                        binding.btnXO.text = "O"
+                        xPlayer = !xPlayer
+                    }
+                }
             }
         }
     }
