@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">shemajamebeli 3</string>
+    <string name="tvTitle">Configure game</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="game_9">3x3</string>
+    <string name="game_16">4x4</string>
+    <string name="game_25">5x5</string>
+</resources>
