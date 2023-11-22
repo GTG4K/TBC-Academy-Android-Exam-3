@@ -16,7 +16,13 @@ class MainActivity : AppCompatActivity() {
 
     fun setup() {
         binding.apply {
-            btnGame9.setOnClickListener { }
+            btnGame9.setOnClickListener {
+                val gameFragment = GameFragment.newInstance()
+                supportFragmentManager.beginTransaction()
+                    .replace(android.R.id.content, gameFragment)
+                    .addToBackStack(null)
+                    .commit()
+            }
             btnGame16.setOnClickListener { }
             btnGame25.setOnClickListener { }
         }
