@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.shemajamebeli3.data.GameData
 import com.example.shemajamebeli3.databinding.FragmentGameBinding
 
@@ -32,18 +33,33 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapterSetup()
+        val gameType = arguments?.getInt(ARG_GAME_TYPE, 3) ?: 3
+
+        adapterSetup(gameType)
     }
 
-    private fun adapterSetup() {
+    private fun adapterSetup(gameType: Int) {
         adapter = XOAdapter()
-        adapter.differ.submitList(GameData.generateGameData(GameType.GAME9))
+        val gameList = when (gameType) {
+            5 -> GameData.generateGameData(GameType.GAME25)
+            4 -> GameData.generateGameData(GameType.GAME16)
+            else -> GameData.generateGameData(GameType.GAME9)
+        }
+        adapter.differ.submitList(gameList)
+
+        val layoutManager = GridLayoutManager(requireContext(), gameType)
+        binding.rvXO.layoutManager = layoutManager
         binding.rvXO.adapter = adapter
     }
 
     companion object {
-        fun newInstance(): GameFragment {
-            return GameFragment()
+        private const val ARG_GAME_TYPE = "arg_game_type"
+        fun newInstance(gameType: Int): GameFragment {
+            val fragment = GameFragment()
+            val args = Bundle()
+            args.putInt(ARG_GAME_TYPE, gameType)
+            fragment.arguments = args
+            return fragment
         }
     }
 }

@@ -17,14 +17,26 @@ class MainActivity : AppCompatActivity() {
     fun setup() {
         binding.apply {
             btnGame9.setOnClickListener {
-                val gameFragment = GameFragment.newInstance()
+                val gameFragment = GameFragment.newInstance(3)
                 supportFragmentManager.beginTransaction()
                     .replace(android.R.id.content, gameFragment)
                     .addToBackStack(null)
                     .commit()
             }
-            btnGame16.setOnClickListener { }
-            btnGame25.setOnClickListener { }
+            btnGame16.setOnClickListener {
+                val gameFragment = GameFragment.newInstance(4)
+                supportFragmentManager.beginTransaction()
+                    .replace(android.R.id.content, gameFragment)
+                    .addToBackStack(null)
+                    .commit()
+            }
+            btnGame25.setOnClickListener {
+                val gameFragment = GameFragment.newInstance(5)
+                supportFragmentManager.beginTransaction()
+                    .replace(android.R.id.content, gameFragment)
+                    .addToBackStack(null)
+                    .commit()
+            }
         }
     }
 }
